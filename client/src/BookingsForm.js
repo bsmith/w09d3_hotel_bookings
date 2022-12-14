@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { postBooking } from './BookingService';
 
-const BookingsForm = () => {
+const BookingsForm = ({ addBooking }) => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -13,8 +14,22 @@ const BookingsForm = () => {
         setFormData(newFormData);
     };
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        postBooking(formData)
+            .then((data) => {
+                addBooking(data);
+            })
+        /* reset the form */
+        setFormData({
+            name: "",
+            email: "",
+            checkInStatus: false
+        })
+    };
+
     return (
-        <form className="BookingsForm">
+        <form onSubmit={onSubmit} className="BookingsForm">
             <h2>Add a Booking</h2>
 
             <div className="formWrap">
