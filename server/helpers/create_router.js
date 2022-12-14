@@ -42,6 +42,21 @@ const createRouter = function(collection) {
             .catch(handleError);
     })
 
+    /* update a booking */
+    router.put('/:id', (req, res) => {
+        const id = req.params.id;
+        const updatedData = req.body;
+        collection
+            .updateOne(
+                { _id: ObjectID(id) },
+                { $set: updatedData }
+            )
+        .then((result) => {
+            res.json(result)
+        })
+        .catch(handleError);
+    })
+
     return router;
 }
 
