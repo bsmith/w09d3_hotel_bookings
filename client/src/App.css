@@ -28,3 +28,7 @@
     display: grid;
     grid-template-columns: 6rem 15rem;
 }
+
+.ErrorMessage {
+    color: red;
+}

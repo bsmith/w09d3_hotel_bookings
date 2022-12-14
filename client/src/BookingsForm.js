@@ -7,6 +7,7 @@ const BookingsForm = ({ addBooking }) => {
         email: "",
         checkInStatus: false
     });
+    const [errorMessage, setErrorMessage] = useState("");
 
     const onChange = (event) => {
         const newFormData = Object.assign({}, formData);
@@ -16,6 +17,17 @@ const BookingsForm = ({ addBooking }) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
+
+        if (!formData.name || !formData.email)
+            return;
+
+        if (!formData.email.includes("@")) {
+            setErrorMessage("Enter an email address");
+            return;
+        }
+
+        setErrorMessage("");
+
         postBooking(formData)
             .then((data) => {
                 addBooking(data);
@@ -32,6 +44,8 @@ const BookingsForm = ({ addBooking }) => {
         <form onSubmit={onSubmit} className="BookingsForm">
             <h2>Add a Booking</h2>
 
+            <p className="ErrorMessage">{errorMessage}</p>
+
             <div className="formWrap">
                 <label htmlFor="name">Name:</label>
                 <input
@@ -39,7 +53,8 @@ const BookingsForm = ({ addBooking }) => {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name} />
+                    value={formData.name}
+                    required />
             </div>
 
             <div className="formWrap">
@@ -49,7 +64,8 @@ const BookingsForm = ({ addBooking }) => {
                     type="text"
                     id="email"
                     name="email"
-                    value={formData.email} />
+                    value={formData.email}
+                    required />
             </div>
 
             <input type="submit" value="Save" id="save" />
