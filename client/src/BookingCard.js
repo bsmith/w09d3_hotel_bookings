@@ -1,4 +1,39 @@
+import styled from 'styled-components';
 import { deleteBooking, putBooking } from './BookingService';
+import { DisplayCard, Button, ButtonBar } from './styles';
+
+const StyledCard = styled(DisplayCard)`
+    max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+
+    margin: 0.25rem;
+
+    /* padding: 0.25rem; */
+
+    > section {
+        background-color: ${ props => 
+            props.checkInStatus ? 'rgb(104 185 255 / 50%)' : 'white'
+        };
+        padding: 0.25rem;
+    };
+
+    > header {
+        background-color: #e5feff;
+        /* margin: 0; */
+        border-bottom: 1px solid black;
+        margin-bottom: 0;
+        padding: 0.25rem;
+    };
+`;
+
+const GuestInformation = styled.div`
+    display: flex;
+    flex-direction: row;
+    column-gap: 4rem;
+    flex-wrap: wrap;
+    /* background: rgb(104 185 255 / 50%); */
+`;
 
 const BookingCard = ({ booking, removeBooking, updateBooking }) => {
     console.log(booking);
@@ -19,20 +54,24 @@ const BookingCard = ({ booking, removeBooking, updateBooking }) => {
             });
     };
 
-    return <div className="BookingCard">
-        <h3>Guest Information</h3>
-        <div className={booking.checkInStatus ? 'GuestInformation CheckedIn' : 'GuestInformation'}>
-            <p>{booking.name}</p>
-            <p>{booking.email}</p>
-            <p>{booking.checkInStatus ? 'checked in' : 'not checked in'}</p>
-        </div>
-        <div className="GuestButtons">
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={handleCheckInOut}>
-                {booking.checkInStatus ? 'Check Out' : 'Check In'}
-            </button>
-        </div>
-    </div>
+    return <StyledCard checkInStatus={booking.checkInStatus}>
+        <header>
+            <h3>Guest Information</h3>
+        </header>
+        <section>
+            <GuestInformation>
+                <p>{booking.name}</p>
+                <p>{booking.email}</p>
+                <p>{booking.checkInStatus ? 'checked in' : 'not checked in'}</p>
+            </GuestInformation>
+            <ButtonBar>
+                <Button onClick={handleCheckInOut}>
+                    {booking.checkInStatus ? 'Check Out' : 'Check In'}
+                </Button>
+                <Button small onClick={handleDelete}>Delete</Button>
+            </ButtonBar>
+        </section>
+    </StyledCard>
 }
 
 export default BookingCard;

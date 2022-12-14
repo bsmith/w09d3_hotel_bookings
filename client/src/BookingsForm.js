@@ -1,5 +1,24 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import { postBooking } from './BookingService';
+
+import { DisplayCard, ErrorMessage, Button } from './styles';
+
+const FormWrap = styled.div`
+    display: grid;
+    grid-template-columns: 6rem 15rem;
+`;
+
+const StyledForm = styled.form`
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    > * {
+        margin: 0;
+    }
+`;
 
 const BookingsForm = ({ addBooking }) => {
     const [formData, setFormData] = useState({
@@ -41,12 +60,12 @@ const BookingsForm = ({ addBooking }) => {
     };
 
     return (
-        <form onSubmit={onSubmit} className="BookingsForm">
+        <StyledForm onSubmit={onSubmit}>
             <h2>Add a Booking</h2>
 
-            <p className="ErrorMessage">{errorMessage}</p>
+            <ErrorMessage>{errorMessage}</ErrorMessage>
 
-            <div className="formWrap">
+            <FormWrap>
                 <label htmlFor="name">Name:</label>
                 <input
                     onChange={onChange}
@@ -55,10 +74,10 @@ const BookingsForm = ({ addBooking }) => {
                     name="name"
                     value={formData.name}
                     required />
-            </div>
+            </FormWrap>
 
-            <div className="formWrap">
-            <label htmlFor="email">Email:</label>
+            <FormWrap>
+                <label htmlFor="email">Email:</label>
                 <input
                     onChange={onChange}
                     type="text"
@@ -66,10 +85,11 @@ const BookingsForm = ({ addBooking }) => {
                     name="email"
                     value={formData.email}
                     required />
-            </div>
+            </FormWrap>
 
-            <input type="submit" value="Save" id="save" />
-        </form>
+            {/* <input type="submit" value="Save" id="save" /> */}
+            <Button type="submit">Save</Button>
+        </StyledForm>
     );
 }
 

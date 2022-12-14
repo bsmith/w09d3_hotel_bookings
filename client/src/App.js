@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import './App.css';
 
 import BookingsForm from './BookingsForm';
 import BookingsGrid from './BookingsGrid';
 import { getBookings } from './BookingService';
+
+const Title = styled.h1`
+    text-align: center;
+`;
 
 function App() {
 
@@ -39,7 +44,7 @@ function App() {
     };
 
     return <>
-        <h1>Welcome Code Inn</h1>
+        <Title>Welcome Code Inn</Title>
         <BookingsForm addBooking={addBooking} />
         <BookingsGrid 
             bookings={guestBookings}
