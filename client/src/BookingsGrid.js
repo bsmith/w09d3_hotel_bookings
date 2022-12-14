@@ -1,11 +1,12 @@
 import BookingCard from './BookingCard';
 
-const BookingsGrid = ({ bookings, removeBooking }) => {
+const BookingsGrid = ({ bookings, removeBooking, updateBooking }) => {
     const bookingsList = bookings.map((booking) => {
         return <BookingCard
             booking={booking}
             key={booking._id}
-            removeBooking={removeBooking} />
+            removeBooking={removeBooking}
+            updateBooking={updateBooking} />
     });
 
     return <>

@@ -30,10 +30,21 @@ function App() {
         setGuestBookings(newBookings);
     };
 
+    const updateBooking = (booking) => {
+        const newBookings = [...guestBookings];
+        const indexToChange = newBookings.map(b => b._id).indexOf(booking._id);
+
+        newBookings.splice(indexToChange, 1, booking);
+        setGuestBookings(newBookings);
+    };
+
     return <>
         <h1>Welcome Code Inn</h1>
         <BookingsForm addBooking={addBooking} />
-        <BookingsGrid bookings={guestBookings} removeBooking={removeBooking} />
+        <BookingsGrid 
+            bookings={guestBookings}
+            removeBooking={removeBooking}
+            updateBooking={updateBooking} />
     </>
 }
 

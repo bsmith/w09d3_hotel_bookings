@@ -1,12 +1,21 @@
-import { deleteBooking } from './BookingService';
+import { deleteBooking, putBooking } from './BookingService';
 
-const BookingCard = ({ booking, removeBooking }) => {
+const BookingCard = ({ booking, removeBooking, updateBooking }) => {
     console.log(booking);
 
     const handleDelete = () => {
         deleteBooking(booking._id)
             .then(() => {
                 removeBooking(booking._id);
+            });
+    };
+
+    const handleCheckInOut = () => {
+        booking.checkInStatus = ! booking.checkInStatus;
+
+        putBooking(booking._id, { checkInStatus: booking.checkInStatus })
+            .then(() => {
+                updateBooking(booking);
             });
     };
 
@@ -19,6 +28,9 @@ const BookingCard = ({ booking, removeBooking }) => {
         </div>
         <div className="GuestButtons">
             <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleCheckInOut}>
+                {booking.checkInStatus ? 'Check Out' : 'Check In'}
+            </button>
         </div>
     </div>
 }
