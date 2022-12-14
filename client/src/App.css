@@ -1,38 +1,30 @@
-.App {
-  text-align: center;
+.BookingCard {
+    border: 1px solid black;
+    border-radius: 0.25rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.BookingCard h3 {
+    border-bottom: 1px solid black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.GuestInformation {
+    display: flex;
+    flex-direction: row;
+    column-gap: 4rem;
+    flex-wrap: wrap;
+    background: rgb(104 185 255 / 50%);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.CheckedIn {
+    background-color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.BookingsForm {
+    border: 1px solid black;
+    border-radius: 0.25rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.formWrap {
+    display: grid;
+    grid-template-columns: 6rem 15rem;
 }

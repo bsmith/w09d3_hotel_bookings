@@ -21,6 +21,7 @@ function App() {
     const removeBooking = () => {};
 
     return <>
+        <h1>Welcome Code Inn</h1>
         <BookingsForm addBooking={addBooking} />
         <BookingsGrid bookings={guestBookings} removeBooking={removeBooking} />
     </>

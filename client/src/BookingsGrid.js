@@ -9,6 +9,7 @@ const BookingsGrid = ({ bookings, removeBooking }) => {
     });
 
     return <>
+        <h2>All Bookings</h2>
         {bookingsList}
     </>;
 }
