@@ -13,13 +13,13 @@ const StyledCard = styled(DisplayCard)`
 
     > section {
         background-color: ${ props => 
-            props.checkInStatus ? 'rgb(104 185 255 / 50%)' : 'white'
+            props.checkInStatus ? props.theme.checkedInColour : props.theme.checkedOutColour
         };
         padding: 0.25rem;
     };
 
     > header {
-        background-color: #e5feff;
+        background-color: ${props => props.theme.headerColour};
         /* margin: 0; */
         border-bottom: 1px solid black;
         margin-bottom: 0;
@@ -33,6 +33,10 @@ const GuestInformation = styled.div`
     column-gap: 4rem;
     flex-wrap: wrap;
     /* background: rgb(104 185 255 / 50%); */
+
+    @media (max-width: 450px) {
+        flex-direction: column;
+    }
 `;
 
 const BookingCard = ({ booking, removeBooking, updateBooking }) => {

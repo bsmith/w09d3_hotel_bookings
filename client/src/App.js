@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import './App.css';
 
@@ -10,6 +10,12 @@ import { getBookings } from './BookingService';
 const Title = styled.h1`
     text-align: center;
 `;
+
+const theme = {
+    headerColour: '#e5feff',
+    checkedInColour: 'rgb(104 185 255 / 50%)',
+    checkedOutColor: 'white',
+};
 
 function App() {
 
@@ -44,12 +50,14 @@ function App() {
     };
 
     return <>
-        <Title>Welcome Code Inn</Title>
-        <BookingsForm addBooking={addBooking} />
-        <BookingsGrid 
-            bookings={guestBookings}
-            removeBooking={removeBooking}
-            updateBooking={updateBooking} />
+        <ThemeProvider theme={theme}>
+            <Title>Welcome Code Inn</Title>
+            <BookingsForm addBooking={addBooking} />
+            <BookingsGrid 
+                bookings={guestBookings}
+                removeBooking={removeBooking}
+                updateBooking={updateBooking} />
+        </ThemeProvider>
     </>
 }
 

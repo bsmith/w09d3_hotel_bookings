@@ -80,7 +80,7 @@ const BookingsForm = ({ addBooking }) => {
                 <label htmlFor="email">Email:</label>
                 <input
                     onChange={onChange}
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     value={formData.email}
