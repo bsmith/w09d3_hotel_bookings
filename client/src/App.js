@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+
 import './App.css';
 
+import BookingsForm from './BookingsForm';
+import BookingsGrid from './BookingsGrid';
+import { getBookings } from './BookingService';
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [guestBookings, setGuestBookings] = useState([]);
+
+    useEffect(() => {
+        getBookings()
+            .then((allBookings) => {
+                setGuestBookings(allBookings);
+            })
+    }, []);
+
+    const addBooking = () => {};
+    const removeBooking = () => {};
+
+    return <>
+        <BookingsForm addBooking={addBooking} />
+        <BookingsGrid bookings={guestBookings} removeBooking={removeBooking} />
+    </>
 }
 
 export default App;
