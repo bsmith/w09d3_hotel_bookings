@@ -11,6 +11,7 @@ const createRouter = function(collection) {
 
     const router = express.Router();
 
+    /* get all bookings */
     router.get('/', (req, res) => {
         collection
             .find()
@@ -18,6 +19,28 @@ const createRouter = function(collection) {
             .then((docs) => res.json(docs))
             .catch(handleError);
     });
+
+    /* creates a booking */
+    router.post('/', (req, res) => {
+        const newData = req.body;
+        collection
+            .insertOne(newData)
+            .then((result) => {
+                res.json(result.ops[0])
+            })
+            .catch(handleError);
+    });
+
+    /* delete a booking */
+    router.delete('/:id', (req, res) => {
+        const id = req.params.id;
+        collection
+            .deleteOne({_id: ObjectID(id)})
+            .then((result) => {
+                res.json(result)
+            })
+            .catch(handleError);
+    })
 
     return router;
 }
